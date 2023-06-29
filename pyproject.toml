@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "livraria"
+version = "0.1.0"
+description = ""
+authors = ["Rosivaldo de Jesus <js.rosivaldo@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.2.2"
+gunicorn = "^20.1.0"
+whitenoise = "^6.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
