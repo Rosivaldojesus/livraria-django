@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.db.models import F
 
 # Create your models here.
 
@@ -59,8 +59,14 @@ class Compra(models.Model):
         choices=StatusCompra.choices, default=StatusCompra.CARRINHO)
 
     def __str__(self):
-        return self.usuario
+        return str(self.id)
 
+    @property
+    def total(self):
+        queryset = self.itens.all().aggregate(
+            total=models.Sum(F('quantidade') * F('livro__preco')))
+        return queryset['total']
+    
 
 class ItensCompra(models.Model):
     compra = models.ForeignKey(
@@ -70,4 +76,4 @@ class ItensCompra(models.Model):
     quantidade = models.IntegerField()
 
     def __str__(self):
-        return self.compra
+        return str(self.id)
